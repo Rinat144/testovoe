@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Estimation extends Model
 {
     use HasFactory;
+
+    protected $table = 'estimations';
+    protected $fillable = ['like', 'post_id'];
+
+    public function posts()
+    {
+        return $this->belongsTo(Post::class, 'post_id', 'id');
+    }
+
 }

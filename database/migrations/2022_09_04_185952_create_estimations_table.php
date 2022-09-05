@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('estimations', function (Blueprint $table) {
             $table->id();
+            $table->integer('like');
+            $table->foreignId('post_id')->constrained('posts');
             $table->timestamps();
         });
     }

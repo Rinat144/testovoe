@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Client extends Model
 {
     use HasFactory;
+
+    protected $table = 'clients';
+    protected $fillable = ['login'];
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class, 'client_id', 'id');
+    }
 }
