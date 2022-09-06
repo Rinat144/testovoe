@@ -18,6 +18,9 @@ namespace App\Models{
  * @property string $login
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Post[] $posts
+ * @property-read int|null $posts_count
+ * @method static \Database\Factories\ClientFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|Client newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Client newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Client query()
@@ -38,6 +41,8 @@ namespace App\Models{
  * @property int $post_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Post $posts
+ * @method static \Database\Factories\EstimationFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|Estimation newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Estimation newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Estimation query()
@@ -61,6 +66,10 @@ namespace App\Models{
  * @property int $client_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Client|null $client
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Estimation[] $estimations
+ * @property-read int|null $estimations_count
+ * @method static \Database\Factories\PostFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|Post newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Post newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Post query()
