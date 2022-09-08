@@ -13,14 +13,14 @@ class EstimationController extends Controller
         $data = $request->validated();
 
         Estimation::insert([
-           'like' => $data['like'],
-           'post_id' => $data['post_id'],
+            'like' => $data['like'],
+            'post_id' => $data['post_id'],
         ]);
 
-        $likeAvg = Estimation::where('post_id','=', $data['post_id'])->avg('like');
+        $likeAvg = Estimation::where('post_id', '=', $data['post_id'])->avg('like');
 
         return response()->json([
-           'LikeAVG' => $likeAvg,
+            'LikeAVG' => $likeAvg,
         ]);
     }
 }

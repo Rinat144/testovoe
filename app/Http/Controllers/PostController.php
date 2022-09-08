@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PostRequest;
 use App\Models\Client;
+use App\Models\Estimation;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -27,6 +28,15 @@ class PostController extends Controller
 
     }
 
+    public function averagePost(int $post)
+    {
+        $post = Post::withAvg('estimations', 'like')
+            ->orderByDesc('estimations_avg_like')
+            ->get()->take($post);
+        dd($post);
+
+    }
+
     private function createClient($login)
     {
         $client = Client::where('login', '=', $login)->first();
@@ -37,4 +47,5 @@ class PostController extends Controller
         }
         return $client->id;
     }
+
 }
