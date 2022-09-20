@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\EstimationRequest;
 use App\Models\Estimation;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class EstimationController extends Controller
 {
-    public function like(EstimationRequest $request)
+
+    public function like(EstimationRequest $request): JsonResponse
     {
         $data = $request->validated();
 
