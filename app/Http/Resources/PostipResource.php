@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 
+use App\Models\Post;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class PostipResource extends JsonResource
@@ -17,7 +18,7 @@ class PostipResource extends JsonResource
     {
             return [
                 'author_ip' => $this->author_ip,
-                'login' => $this->client->login,
+                'login' => $this->client->login
             ];
     }
 }

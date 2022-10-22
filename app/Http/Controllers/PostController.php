@@ -3,12 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PostRequest;
-use App\Http\Resources\PostipResource;
 use App\Http\Resources\PostResource;
 use App\Models\Client;
 use App\Models\Post;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class PostController extends Controller
@@ -31,6 +29,25 @@ class PostController extends Controller
 
     }
 
+    public function listIp(): JsonResponse
+    {
+        $posts = Post::Join('clients', 'client_id', '=', 'clients.id')
+            ->select('author_ip', 'login')
+            ->orderByDesc('author_ip')
+            ->get();
+
+        $groups = [];
+        foreach ($posts as $post) {
+            $groups[$post->author_ip]['login'][] = $post->login;
+        }
+
+        /*      $grouped = $posts->mapToGroups(function ($item) {
+                  return [$item['author_ip'] => $item['login']];
+              });*/
+        return response()->json([
+            $groups
+        ]);
+    }
 
     public function averagePost(int $post): ResourceCollection
     {
@@ -39,15 +56,6 @@ class PostController extends Controller
             ->get()->take($post);
 
         return PostResource::collection($post);
-    }
-
-    public function listIp(): ResourceCollection
-    {
-        $author_ip = Post::with(['client'])->select('author_ip', 'client_id')->orderBy('author_ip')
-            ->get();
-
-        return PostipResource::collection($author_ip);
-
     }
 
     private function createClient($login)
